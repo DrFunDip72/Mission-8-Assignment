@@ -20,33 +20,38 @@ namespace Mission_8_Assignment.Controllers
             return View(tasks);
         }
 
-        // GET: Add new task
+        // GET: Add new task (show empty form)
         [HttpGet]
-        public IActionResult ()
+        public IActionResult AddTask()
         {
             return View(new Mission_8_Assignment.Models.Task());
         }
 
-        // Save new task
-        [HttpPost]
-        public IActionResult EditTask(Mission_8_Assignment.Models.Task t)
-        {
-            if (ModelState.IsValid)
-            {
-                _repo.AddTask(t);
-                return RedirectToAction("Index");
-            }
-
-            return View(t);
-        }
-
-        // GET: Edit existing task
+        // GET: Edit existing task (show form with data)
         [HttpGet]
         public IActionResult EditTask(int id)
         {
             var task = _repo.Tasks.Single(x => x.TaskId == id);
-
             return View(task);
+        }
+
+        // POST: Save both new and edited tasks
+        [HttpPost]
+        public IActionResult SaveTask(Mission_8_Assignment.Models.Task t)
+        {
+            if (ModelState.IsValid)
+            {
+                if (t.TaskId == 0)  // New task (TaskId defaults to 0)
+                {
+                    _repo.AddTask(t);
+                }
+                else  // Existing task
+                {
+                    _repo.UpdateTask(t);  // You'll need this method
+                }
+                return RedirectToAction("Index");
+            }
+            return View(t);  // Return to same view if validation fails
         }
 
         // Delete

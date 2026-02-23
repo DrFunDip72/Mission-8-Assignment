@@ -1,14 +1,17 @@
 @model Mission_8_Assignment.Models.Task
 
 @{
-    ViewBag.Title = "Add Goal";
+    ViewBag.Title = Model.TaskId == 0 ? "Add Goal" : "Edit Goal";
 }
 
-<h2>Add a Goal</h2>
+<h2>@ViewBag.Title</h2>
 
 <div class="row">
     <div class="col-md-6">
-        <form method="post" asp-controller="Home" asp-action="EditTask">
+        <form method="post" asp-controller="Home" asp-action="SaveTask">
+            <!-- Hidden field for TaskId (important for edit vs add) -->
+            <input type="hidden" asp-for="TaskId" />
+            
             <div class="mb-3">
                 <label asp-for="TaskName" class="form-label">Task *</label>
                 <input type="text" class="form-control" asp-for="TaskName" required />
@@ -46,7 +49,9 @@
                 <label class="form-check-label" asp-for="Completed">Completed</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Goal</button>
+            <button type="submit" class="btn btn-primary">
+                @(Model.TaskId == 0 ? "Add Goal" : "Update Goal")
+            </button>
             <a href="/Home/Index" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
