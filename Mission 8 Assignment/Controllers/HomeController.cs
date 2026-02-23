@@ -6,20 +6,58 @@ namespace Mission_8_Assignment.Controllers
 {
     public class HomeController : Controller
     {
+        private ITaskRepository _repo;
+        public HomeController(ITaskRepository temp)
+        {
+            _repo = temp;
+        }
+
+        // INDEX - Quadrant Page
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var tasks = _repo.Tasks.Where(x => x.Completed == false).ToList();
+            return View(tasks);
         }
 
-        public IActionResult Privacy()
+        // GET: Add new task
+        [HttpGet]
+        public IActionResult EditTask()
         {
-            return View();
+            return View(new Task());
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // Save new task
+        [HttpPost]
+        public IActionResult EditTask(Task t)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(t);
+                return RedirectToAction("Index");
+            }
+
+            return View(t);
         }
+
+        // GET: Edit existing task
+        [HttpGet]
+        public IActionResult EditTask(int id)
+        {
+            var task = _repo.Tasks.Single(x => x.TaskId == id);
+
+            return View(task);
+        }
+
+        // Delete
+        public IActionResult Delete(int id)
+        {
+            var task = _repo.Tasks.Single(x => x.TaskId == id);
+            _repo.DeleteTask(task);
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

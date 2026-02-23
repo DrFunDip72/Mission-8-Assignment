@@ -1,7 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Mission_8_Assignment.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<TaskContext>(OptionsBuilderConfigurationExtensions => //Simply put, this will configure the TaskContext to use SQLite as its
+           //database provider, and it will use the connection string specified in the application's configuration under "ConnectionStrings:TaskConnection".
+{
+    OptionsBuilderConfigurationExtensions.UseSqlite(builder.Configuration["ConnectionStrings:TaskConnection"]);
+});
+
+//Dependency Injection for the Repository
+builder.Services.AddScoped<ITaskRepository, EFTaskRepository>();
+
 
 var app = builder.Build();
 
