@@ -22,7 +22,7 @@ namespace Mission_8_Assignment.Controllers
 
         // GET: Add new task
         [HttpGet]
-        public IActionResult EditTask()
+        public IActionResult ()
         {
             return View(new Mission_8_Assignment.Models.Task());
         }
