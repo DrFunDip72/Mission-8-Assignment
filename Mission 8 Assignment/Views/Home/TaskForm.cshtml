@@ -1,7 +1,7 @@
 @model Mission_8_Assignment.Models.Task
 
 @{
-    ViewBag.Title = Model.TaskId == 0 ? "Add Goal" : "Edit Goal";
+    ViewBag.Title = Model.TaskId == 0 ? "Add Task" : "Edit Task";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -50,7 +50,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">
-                @(Model.TaskId == 0 ? "Add Goal" : "Update Goal")
+                @(Model.TaskId == 0 ? "Add Task" : "Update Task")
             </button>
             <a href="/Home/Index" class="btn btn-secondary">Cancel</a>
         </form>
