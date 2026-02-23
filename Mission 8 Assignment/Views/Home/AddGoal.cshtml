@@ -5,3 +5,49 @@
 }
 
 <h2>Add a Goal</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-controller="Home" asp-action="AddGoal">
+            <div class="mb-3">
+                <label asp-for="TaskName" class="form-label">Task *</label>
+                <input type="text" class="form-control" asp-for="TaskName" required />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DueDate" class="form-label">Due Date</label>
+                <input type="date" class="form-control" asp-for="DueDate" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Quadrant" class="form-label">Quadrant *</label>
+                <select class="form-select" asp-for="Quadrant" required>
+                    <option value="">Select a Quadrant</option>
+                    <option value="1">Quadrant I: Important / Urgent</option>
+                    <option value="2">Quadrant II: Important / Not Urgent</option>
+                    <option value="3">Quadrant III: Not Important / Urgent</option>
+                    <option value="4">Quadrant IV: Not Important / Not Urgent</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Category" class="form-label">Category</label>
+                <select class="form-select" asp-for="Category" >
+                    <option value="">Select a Category</option>
+                    <option value="Home">Home</option>
+                    <option value="School">School</option>
+                    <option value="Work">Work</option>
+                    <option value="Church">Church</option>
+                </select>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" asp-for="Completed" value="true" />
+                <label class="form-check-label" asp-for="Completed">Completed</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Goal</button>
+            <a href="/Home/Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
