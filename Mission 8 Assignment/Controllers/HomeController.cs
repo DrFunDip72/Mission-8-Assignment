@@ -24,7 +24,7 @@ namespace Mission_8_Assignment.Controllers
         [HttpGet]
         public IActionResult AddTask()
         {
-            return View(new Mission_8_Assignment.Models.Task());
+            return View("TaskForm", new Mission_8_Assignment.Models.Task());
         }
 
         // GET: Edit existing task (show form with data)
@@ -32,7 +32,7 @@ namespace Mission_8_Assignment.Controllers
         public IActionResult EditTask(int id)
         {
             var task = _repo.Tasks.Single(x => x.TaskId == id);
-            return View(task);
+            return View("TaskForm", task);
         }
 
         // POST: Save both new and edited tasks
@@ -51,7 +51,7 @@ namespace Mission_8_Assignment.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            return View(t);  // Return to same view if validation fails
+            return View("TaskForm", t);  // Return to same view if validation fails
         }
 
         // Delete
