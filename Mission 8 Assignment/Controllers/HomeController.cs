@@ -24,12 +24,12 @@ namespace Mission_8_Assignment.Controllers
         [HttpGet]
         public IActionResult EditTask()
         {
-            return View(new Task());
+            return View(new Mission_8_Assignment.Models.Task());
         }
 
         // Save new task
         [HttpPost]
-        public IActionResult EditTask(Task t)
+        public IActionResult EditTask(Mission_8_Assignment.Models.Task t)
         {
             if (ModelState.IsValid)
             {
