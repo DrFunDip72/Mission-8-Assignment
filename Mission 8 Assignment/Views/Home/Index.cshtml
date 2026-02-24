@@ -1,8 +1,134 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Mission_8_Assignment.Models.Task>
+
+@{
+    ViewData["Title"] = "Quadrants";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container" style="border: 2px solid #333; padding: 20px;">
+
+    <!-- Title + Add Button -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2>Time Management Quadrants</h2>
+        </div>
+    </div>
+
+    <!-- TOP ROW -->
+    <div class="row">
+
+        <!-- Quadrant I -->
+        <div class="col-md-6" style="border: 2px solid #444; padding: 15px; background-color: #f8f9fa;">
+            <h4 style="border-bottom: 1px solid #999; padding-bottom: 5px;">Quadrant I</h4>
+            <p><strong>Important / Urgent</strong></p>
+
+            @foreach (var task in Model.Where(t => t.Quadrant == "1"))
+            {
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: white;">
+                    <strong>@task.TaskName</strong><br />
+                    Due: @task.DueDate.ToShortDateString()<br />
+                    Category: @task.Category<br /><br />
+
+                    <a asp-action="EditTask"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Quadrant II -->
+        <div class="col-md-6" style="border: 2px solid #444; padding: 15px; background-color: #f8f9fa;">
+            <h4 style="border-bottom: 1px solid #999; padding-bottom: 5px;">Quadrant II</h4>
+            <p><strong>Important / Not Urgent</strong></p>
+
+            @foreach (var task in Model.Where(t => t.Quadrant == "2"))
+            {
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: white;">
+                    <strong>@task.TaskName</strong><br />
+                    Due: @task.DueDate.ToShortDateString()<br />
+                    Category: @task.Category<br /><br />
+
+                    <a asp-action="EditTask"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="row mt-4">
+
+        <!-- Quadrant III -->
+        <div class="col-md-6" style="border: 2px solid #444; padding: 15px; background-color: #f8f9fa;">
+            <h4 style="border-bottom: 1px solid #999; padding-bottom: 5px;">Quadrant III</h4>
+            <p><strong>Not Important / Urgent</strong></p>
+
+            @foreach (var task in Model.Where(t => t.Quadrant == "3"))
+            {
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: white;">
+                    <strong>@task.TaskName</strong><br />
+                    Due: @task.DueDate.ToShortDateString()<br />
+                    Category: @task.Category<br /><br />
+
+                    <a asp-action="EditTask"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </div>
+            }
+        </div>
+
+        <!-- Quadrant IV -->
+        <div class="col-md-6" style="border: 2px solid #444; padding: 15px; background-color: #f8f9fa;">
+            <h4 style="border-bottom: 1px solid #999; padding-bottom: 5px;">Quadrant IV</h4>
+            <p><strong>Not Important / Not Urgent</strong></p>
+
+            @foreach (var task in Model.Where(t => t.Quadrant == "4"))
+            {
+                <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: white;">
+                    <strong>@task.TaskName</strong><br />
+                    Due: @task.DueDate.ToShortDateString()<br />
+                    Category: @task.Category<br /><br />
+
+                    <a asp-action="EditTask"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@task.TaskId"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </div>
+            }
+        </div>
+
+    </div>
+
 </div>
