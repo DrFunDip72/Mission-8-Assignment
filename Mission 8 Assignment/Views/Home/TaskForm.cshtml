@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = Model.TaskId == 0 ? "Add Task" : "Edit Task";
+    var minDate = DateTime.Today;
+    if (Model.DueDate != default && Model.DueDate.Date < DateTime.Today)
+    {
+        minDate = Model.DueDate.Date;
+    }
 }
 
 <h2>@ViewBag.Title</h2>
@@ -19,7 +24,7 @@
 
             <div class="mb-3">
                 <label asp-for="DueDate" class="form-label">Due Date</label>
-                <input type="date" class="form-control" asp-for="DueDate" />
+                <input type="date" class="form-control" asp-for="DueDate" min="@minDate.ToString("yyyy-MM-dd")"/>
             </div>
 
             <div class="mb-3">
